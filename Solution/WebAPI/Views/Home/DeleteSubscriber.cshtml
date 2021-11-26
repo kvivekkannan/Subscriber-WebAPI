@@ -1,0 +1,93 @@
+﻿@model WebAPI.Models.Subscriber
+
+@{
+    ViewBag.Title = "Delete Subscriber";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>DeleteSubscriber</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>@ViewBag.Title</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.SubscriberID)
+        </dt>
+        <dd id="id">
+            @Html.DisplayFor(model => model.SubscriberID)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.SubscriberName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SubscriberName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SubscriberEmail)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SubscriberEmail)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SubscriberAge)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SubscriberAge)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SubscriberUsername)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SubscriberUsername)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SubscriberPassword)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SubscriberPassword)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <button type="button" id="deleteDetailsubmit" data-model-id="@Model.SubscriberID" onclick="deleteDetailSubmit()">Delete subscriber details</button>|
+            @Html.ActionLink("Back to Subscriber's List", "Subscribers")
+        </div>
+    }
+<script type="text/javascript">
+    function deleteDetailSubmit() {
+        var id = $(this).attr('data-model-id');
+        var msg = confirm("Are you sure to confirm deleting this record?");
+        if (msg) {
+            $.ajax({
+                type: "POST",
+                url: "https://localhost:44378/api/WebAPI/DeleteSubscriber?id=" + id,
+                data: { id: id },
+                success: function () {
+                    alert("Subscriber deleted succesfully");
+                    window.location.href = "https://localhost:44378/Home/Subscribers";
+                },
+                error: function () {
+                    alert("Deletion failed");
+                    window.location.href = "https://localhost:44378/Home/Subscribers";
+                }
+            });
+        }
+    };
+
+</script>
+</div>

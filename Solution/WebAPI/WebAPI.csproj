@@ -234,6 +234,7 @@
     <Content Include="Views\Home\Register.cshtml" />
     <Content Include="Views\Home\Subscribers.cshtml" />
     <Content Include="Views\Home\EditSubscriber.cshtml" />
+    <Content Include="Views\Home\DeleteSubscriber.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -41,10 +41,10 @@ namespace WebAPI.Controllers
             return Json(subs, JsonRequestBehavior.AllowGet);
         }
         
-        public ActionResult EditSubscriber()
+        public ActionResult EditSubscriber(Subscriber subscriber)
         {
             ViewBag.Title = "Edit details";
-            return View();
+            return View(subscriber);
         }
         public ActionResult DeleteSubscriber(int? id)
         {

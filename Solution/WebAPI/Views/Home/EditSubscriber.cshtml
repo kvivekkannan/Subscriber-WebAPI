@@ -4,8 +4,8 @@
     //ViewBag.Title = "EditSubscriber";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-@*@Model.SubscriberName*@
-<h2>Edit details - </h2>
+
+<h2>Edit details - @Model.SubscriberName</h2>
 
 @using (Html.BeginForm())
 {
@@ -74,7 +74,7 @@
         $("#editDetailsubmit").click(function (e) {
             e.preventDefault();
             var id = $(this).SubscriberId;
-            var url = "https://localhost:44378/api/WebAPI/UpdateSubscriberDetails";
+            var url = "https://localhost:44378/api/WebAPI/UpdateSubscriberDetails?id="+id;
             var registerData = new Object();
             registerData.SubscriberName = $("#SubscriberName").val();
             registerData.SubscriberEmail = $("#SubscriberEmail").val();
@@ -84,7 +84,7 @@
             var msg = confirm("Values received. Do you wish to proceed with updating the details?");
             if (msg) {
                 $.ajax({
-                    type: "GET",
+                    type: "POST",
                     url: url,
                     data: registerData,
                     success: function (registerData) {

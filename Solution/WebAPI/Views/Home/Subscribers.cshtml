@@ -26,7 +26,7 @@ td {
             <th>Age</th>
             <th>Username</th>
             <th>Edit</th>
-            <th>Delete</th>
+            <th>Delete</th>Edit details
         </tr>
     </table>
 </div>
@@ -41,31 +41,11 @@ td {
                 dataSub += '<td>'+value.SubscriberEmail+'</td>';
                 dataSub += '<td>'+value.SubscriberAge+'</td>';
                 dataSub += '<td>' + value.SubscriberUsername + '</td>';
-                dataSub += '<td>' + '<button>Edit details</button>' + '</td>';
-                dataSub += '<td>' + '<button>Delete Subscriber</button>' + '</td>';
+                dataSub += '<td>' + '<button><a href="@Url.Action("EditSubscriber","Home", new {  })">Edit details</a></button>' + '</td>';
+                dataSub += '<td>' + '<button><a href="@Url.Action("DeleteSubscriber","Home", new {  })">Delete Subscriber</a></button>' + '</td>';
                 dataSub += '</tr>';
             });
             $('#tblSubscribers').append(dataSub);
-
         });
-        //function onload() { loadJson("https://localhost:44378/Home/GetSubscribersJson", displayData());}
-        //$.get("https://localhost:44378/Home/GetSubscribersJson",function (data) {
-        //    console.log("script");
-        //    $.each(data, function (index, item) {
-        //        var $tr = $('<tr>').append(
-        //            $('<td>').text(item.SubscriberName),
-        //            $('<td>').text(item.SubscriberEmail),
-        //            $('<td>').text(item.SubscriberAge),
-        //            $('<td>').text(item.SubscriberUsername)
-        //        );
-        //        //var tr = $("<tr></tr>");
-        //        //tr.html = (("<td>" + item.SubscriberName + "</td>")
-        //        //    + " " + ("<td>" + item.SubscriberEmail + "</td>")
-        //        //    + " " + ("<td>" + item.SubscriberAge + "</td>")
-        //        //    + " " + ("<td>" + item.SubscriberUsername + "</td>"));
-        //        //tblSubscriber.append(tr);
-        //    });
-        //    console.log("After");
-        //});
     });
 </script>
