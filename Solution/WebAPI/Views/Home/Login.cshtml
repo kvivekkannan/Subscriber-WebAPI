@@ -1,0 +1,101 @@
+﻿@model WebAPI.Models.Subscriber
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link href="~/Content/main.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+</head>
+<body>
+    <div class="contentWrapper">
+        <div class="space60"></div>
+        <div class="space20"></div>
+        <div class="loginWrapper">
+            @using (Html.BeginForm("Login", "Home", FormMethod.Post, new { @id = "loginForm" }))
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="form-horizontal">
+                    <div class="space20"></div>
+                    <h4 style="text-align:center;">Enter the credentials to Login</h4>
+                    @*<hr />*@
+                    <div class="loginElementWrapper">
+                        <div class="space30"></div>
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="form-group">
+                            <div> @Html.LabelFor(model => model.SubscriberUsername, htmlAttributes: new { @class = "control-label col-md-2 textTitle " })</div>
+                            <div class="space10"></div>
+                            <div class="col-md-10">
+                                @Html.ValidationMessageFor(model => model.SubscriberUsername, "", new { @class = "text-danger" })
+                                @Html.EditorFor(model => model.SubscriberUsername, new { htmlAttributes = new { @class = "form-control editorWidth" } })
+                            </div>
+                        </div>
+
+                        <div class="space20"></div>
+                        <div class="form-group">
+                            <div> @Html.LabelFor(model => model.SubscriberPassword, htmlAttributes: new { @class = "control-label col-md-2 textTitle " })</div>
+                            <div class="space10"></div>
+                            <div class="col-md-10">
+                                @Html.ValidationMessageFor(model => model.SubscriberPassword, "", new { @class = "text-danger" })
+                                @Html.EditorFor(model => model.SubscriberPassword, new { htmlAttributes = new { @class = "form-control  editorWidth" } })
+                            </div>
+                        </div>
+                        <div class="space30"></div>
+                    </div>
+                </div>
+
+                <div class="actionCenter" style="display:flex">
+                    <button type="button" id="loginOnSubmit" onclick="loginFormSubmit()">Log-In</button>
+                    <div style="width:50px;"></div>
+                    <button type="button" id="backToIndex" onclick="redirectToIndex()">Back to Previous</button>
+                </div>
+                <div class="space40"></div>
+            }
+        </div>
+    </div>
+    <script type="text/javascript">
+        function redirectToIndex() {
+            alert("Going back....");
+            window.location.href = "Index";
+        }
+        function loginFormSubmit() {
+            var url = "https://localhost:44378/api/WebAPI/Authenticate";
+            var loginData = new Object();
+            loginData.SubscriberUsername = $("#SubscriberUsername").val();
+            loginData.SubscriberPassword = $("#SubscriberPassword").val();
+            alert("Object values obtained....");
+            var msg = confirm("Do you wish to proceed with Login?");
+            if (msg) {
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    data: loginData,
+                    success: function () {
+                        window.location.href = "https://localhost:44378/Home/Subscribers";
+                    },
+                    error() {
+                        alert("Unsuccesful login");
+                        location.reload();
+                    }
+                })
+            }
+
+
+            //$("#loginOnSubmit").click(function (e) {
+            //    e.preventDefault();
+                
+            //});
+            //$(document).ready(function () {
+                
+
+            //});
+        }
+    </script>
+</body>
+</html>

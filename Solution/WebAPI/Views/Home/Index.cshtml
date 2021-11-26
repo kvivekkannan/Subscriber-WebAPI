@@ -1,0 +1,41 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link href="~/Content/main.css" rel="stylesheet" />
+</head>
+<body>
+    <div>
+        <div class="contentWrapper">
+            <div class="baseWrapper">
+                <div class="space60"></div>
+                <div class="space60"></div>
+                <div class="space60"></div>
+                <h2 class="introText">CHOOSE YOUR ACTION TO PROCEED</h2>
+                <div class="space40"></div>
+                <div class="actionContainer">
+                    <button type="button" id='logBtnIndex' class="button-large-main" onclick="loginRedirect()">Log-In</button>
+                    <div class="width50"></div>
+                    <button type="button" id='regBtnIndex' class="button-large-main" onclick="registerRedirect()">Register</button>
+                </div>
+                <div class="space40"></div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function loginRedirect() {
+            window.location.href = "@Url.Action("Login","Home")";
+        }
+        function registerRedirect() {
+            window.location.href = "@Url.Action("Register","Home")";
+        }
+    </script>
+</body>
+</html>

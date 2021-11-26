@@ -1,0 +1,71 @@
+﻿@model WebAPI.Models.Subscriber
+
+@{
+    //ViewBag.Title = "Subscribers";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>List of Subscribers details</h2>
+<style>
+th{
+    width:220px;
+    height: 24px;
+}
+td {
+    width: 220px;
+    height: 24px;
+}
+
+</style>
+<div>
+    <table id="tblSubscribers">
+        <tr>
+            <th>Subscriber ID</th>
+            <th>Subscriber Name</th>
+            <th>Email Address</th>
+            <th>Age</th>
+            <th>Username</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+    </table>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $.getJSON("https://localhost:44378/Home/GetSubscribersJson", function (data) {
+            var dataSub = '';
+            $.each(data, function (key, value) {
+                dataSub += '<tr>';
+                dataSub += '<td>' + value.SubscriberID + '</td>';
+                dataSub += '<td>'+value.SubscriberName+'</td>';
+                dataSub += '<td>'+value.SubscriberEmail+'</td>';
+                dataSub += '<td>'+value.SubscriberAge+'</td>';
+                dataSub += '<td>' + value.SubscriberUsername + '</td>';
+                dataSub += '<td>' + '<button>Edit details</button>' + '</td>';
+                dataSub += '<td>' + '<button>Delete Subscriber</button>' + '</td>';
+                dataSub += '</tr>';
+            });
+            $('#tblSubscribers').append(dataSub);
+
+        });
+        //function onload() { loadJson("https://localhost:44378/Home/GetSubscribersJson", displayData());}
+        //$.get("https://localhost:44378/Home/GetSubscribersJson",function (data) {
+        //    console.log("script");
+        //    $.each(data, function (index, item) {
+        //        var $tr = $('<tr>').append(
+        //            $('<td>').text(item.SubscriberName),
+        //            $('<td>').text(item.SubscriberEmail),
+        //            $('<td>').text(item.SubscriberAge),
+        //            $('<td>').text(item.SubscriberUsername)
+        //        );
+        //        //var tr = $("<tr></tr>");
+        //        //tr.html = (("<td>" + item.SubscriberName + "</td>")
+        //        //    + " " + ("<td>" + item.SubscriberEmail + "</td>")
+        //        //    + " " + ("<td>" + item.SubscriberAge + "</td>")
+        //        //    + " " + ("<td>" + item.SubscriberUsername + "</td>"));
+        //        //tblSubscriber.append(tr);
+        //    });
+        //    console.log("After");
+        //});
+    });
+</script>
