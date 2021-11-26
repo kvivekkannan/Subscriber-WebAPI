@@ -35,7 +35,9 @@ td {
         $.getJSON("https://localhost:44378/Home/GetSubscribersJson", function (data) {
             var dataSub = '';
             $.each(data, function (key, value) {
-                dataSub += '<tr>';
+                id = value.SubscriberID;
+                console.log(id);
+                dataSub += '<tr id='+"value.SubscriberID"+'> ';
                 dataSub += '<td>' + value.SubscriberID + '</td>';
                 dataSub += '<td>'+value.SubscriberName+'</td>';
                 dataSub += '<td>'+value.SubscriberEmail+'</td>';
