@@ -61,7 +61,6 @@
     </div>
     <script type="text/javascript">
         function redirectToIndex() {
-            alert("Going back....");
             window.location.href = "Index";
         }
         function loginFormSubmit() {
@@ -69,7 +68,6 @@
             var loginData = new Object();
             loginData.SubscriberUsername = $("#SubscriberUsername").val();
             loginData.SubscriberPassword = $("#SubscriberPassword").val();
-            alert("Object values obtained....");
             var msg = confirm("Do you wish to proceed with Login?");
             if (msg) {
                 $.ajax({

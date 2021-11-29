@@ -60,34 +60,58 @@
 
     </dl>
 
-    @using (Html.BeginForm()) {
+    @using (Html.BeginForm())
+    {
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <button type="button" id="deleteDetailsubmit" data-model-id="@Model.SubscriberID" onclick="deleteDetailSubmit()">Delete subscriber details</button>|
+            <button type="button" id="deleteDetailsubmit">Delete subscriber details</button>|
             @Html.ActionLink("Back to Subscriber's List", "Subscribers")
         </div>
     }
-<script type="text/javascript">
-    function deleteDetailSubmit() {
-        var id = $(this).attr('data-model-id');
-        var msg = confirm("Are you sure to confirm deleting this record?");
-        if (msg) {
-            $.ajax({
-                type: "POST",
-                url: "https://localhost:44378/api/WebAPI/DeleteSubscriber?id=" + id,
-                data: { id: id },
-                success: function () {
-                    alert("Subscriber deleted succesfully");
-                    window.location.href = "https://localhost:44378/Home/Subscribers";
-                },
-                error: function () {
-                    alert("Deletion failed");
-                    window.location.href = "https://localhost:44378/Home/Subscribers";
-                }
-            });
-        }
-    };
+    <script type="text/javascript">
 
-</script>
+    $(document).ready(function () {
+        $("#deleteDetailsubmit").on('click', function () {
+            var row = $(this).closest("tr");
+            var rowId = row.find("td:eq[0]").text();
+            var msg = confirm("Are you sure to confirm deleting this record?");
+            if (msg) {
+                $.ajax({
+                    type: "POST",
+                    url: "https://localhost:44378/api/WebAPI/DeleteSubscriber?id=" + id,
+                    data: rowId,
+                    success: function () {
+                        alert("Subscriber deleted succesfully");
+                        window.location.href = "https://localhost:44378/Home/Subscribers";
+                    },
+                    error: function () {
+                        alert("Deletion failed");
+                        window.location.href = "https://localhost:44378/Home/Subscribers";
+                    }
+                });
+            }
+        })
+    })
+    //function deleteDetailSubmit() {
+    //    var id = $(this).attr('data-model-id');
+    //    var msg = confirm("Are you sure to confirm deleting this record?");
+    //    if (msg) {
+    //        $.ajax({
+    //            type: "POST",
+    //            url: "https://localhost:44378/api/WebAPI/DeleteSubscriber?id=" + id,
+    //            data: { id: id },
+    //            success: function () {
+    //                alert("Subscriber deleted succesfully");
+    //                window.location.href = "https://localhost:44378/Home/Subscribers";
+    //            },
+    //            error: function () {
+    //                alert("Deletion failed");
+    //                window.location.href = "https://localhost:44378/Home/Subscribers";
+    //            }
+    //        });
+    //    }
+    //};
+
+    </script>
 </div>

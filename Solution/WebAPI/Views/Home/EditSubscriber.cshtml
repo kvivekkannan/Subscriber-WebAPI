@@ -5,82 +5,83 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Edit details - @Model.SubscriberName</h2>
+<h2>Edit details</h2>
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
 
-<div class="form-horizontal">
-    <hr />
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.SubscriberID, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.DisplayFor(model => model.SubscriberID);
+        <div class="form-group">
+            @Html.LabelFor(model => model.SubscriberID, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DisplayFor(model => model.SubscriberID);
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.SubscriberName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.SubscriberName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.SubscriberName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.SubscriberEmail, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.SubscriberEmail, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.SubscriberEmail, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.SubscriberAge, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.SubscriberAge, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.SubscriberAge, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.SubscriberUsername, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.SubscriberUsername, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.SubscriberUsername, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.SubscriberPassword, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.SubscriberPassword, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.SubscriberPassword, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group actionCenter">
+            <button type="button" id="editDetailsubmit" onclick="editDetailSubmit()">Update subscriber details</button>
+            <div style="width:50px;"></div>
+            <button type="button" id="backSubscriberlist" onclick="redirectToList()">Back to Subscribers list</button>
         </div>
     </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.SubscriberName, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.SubscriberName, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.SubscriberName, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.SubscriberEmail, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.SubscriberEmail, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.SubscriberEmail, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.SubscriberAge, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.SubscriberAge, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.SubscriberAge, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.SubscriberUsername, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.SubscriberUsername, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.SubscriberUsername, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.SubscriberPassword, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.SubscriberPassword, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.SubscriberPassword, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group actionCenter">
-        <button type="button" id="editDetailsubmit" onclick="editDetailSubmit()">Update subscriber details</button>
-        <div style="width:50px;"></div>
-        <button type="button" id="backSubscriberlist" onclick="redirectToList()">Back to Subscribers list</button>
-    </div>
-</div>
 }
 <script type="text/javascript">
     function editDetailSubmit() {
         $("#editDetailsubmit").click(function (e) {
             e.preventDefault();
-            var id = $(this).SubscriberId;
-            var url = "https://localhost:44378/api/WebAPI/UpdateSubscriberDetails?id="+id;
             var registerData = new Object();
+            registerData.SubscriberId = $("#SubscriberID").val();
             registerData.SubscriberName = $("#SubscriberName").val();
             registerData.SubscriberEmail = $("#SubscriberEmail").val();
             registerData.SubscriberAge = $("#SubscriberAge").val();
             registerData.SubscriberUsername = $("#SubscriberUsername").val();
             registerData.SubscriberPassword = $("#SubscriberPassword").val();
+            var id = registerData.SubscriberId;
+            var url = "https://localhost:44378/api/WebAPI/UpdateSubscriberDetails?id="+id;
             var msg = confirm("Values received. Do you wish to proceed with updating the details?");
             if (msg) {
                 $.ajax({

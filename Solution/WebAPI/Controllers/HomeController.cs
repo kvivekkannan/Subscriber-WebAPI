@@ -40,17 +40,25 @@ namespace WebAPI.Controllers
             var subs = GetSubscriberData();
             return Json(subs, JsonRequestBehavior.AllowGet);
         }
-        
-        public ActionResult EditSubscriber(Subscriber subscriber)
+
+        [Route("EditSubscriber")]
+        [HttpGet]
+        public ActionResult EditSubscriber(int? id)
         {
-            ViewBag.Title = "Edit details";
-            return View(subscriber);
+            if (id != null)
+            {
+                ViewBag.Title = "Edit details";
+                return View(id);
+            }
+            else
+                return View();
         }
+        
         public ActionResult DeleteSubscriber(int? id)
         {
             if (id != null)
             {                
-                return View("Subscribers","Home");
+                return View(id);
             }
             else
                 return View();

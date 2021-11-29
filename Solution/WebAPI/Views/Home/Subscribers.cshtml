@@ -37,17 +37,44 @@ td {
             $.each(data, function (key, value) {
                 id = value.SubscriberID;
                 console.log(id);
-                dataSub += '<tr id='+"value.SubscriberID"+'> ';
+                dataSub += '<tr>';
                 dataSub += '<td>' + value.SubscriberID + '</td>';
                 dataSub += '<td>'+value.SubscriberName+'</td>';
                 dataSub += '<td>'+value.SubscriberEmail+'</td>';
                 dataSub += '<td>'+value.SubscriberAge+'</td>';
                 dataSub += '<td>' + value.SubscriberUsername + '</td>';
-                dataSub += '<td>' + '<button><a href="@Url.Action("EditSubscriber","Home", new {  })">Edit details</a></button>' + '</td>';
-                dataSub += '<td>' + '<button><a href="@Url.Action("DeleteSubscriber","Home", new {  })">Delete Subscriber</a></button>' + '</td>';
+                dataSub += '<td>' + '<button onclick="editSubscriberOnClick()">Edit details</button>' + '</td>';
+                dataSub += '<td>' + '<button onclick="deleteSubscriberOnClick()">Delete Subscriber</button>' + '</td>';
                 dataSub += '</tr>';
             });
             $('#tblSubscribers').append(dataSub);
         });
     });
+    function editSubscriberOnClick() {
+        var row = $(this).closest("tr");
+        var id = row.find("td:eq[0]").text();
+        alert("Edit Id value is: "+ id);
+        var url = "https://localhost:44378/Home/EditSubscriber?id="+id;
+        $.ajax({
+            type: "GET",
+            data: { id:id },
+            url: url,
+            success: function () {
+                console.log("Edit id value: "+id+" - Success");
+            }, error: function () {
+                console.log("Edit id value: " + id + " - Failure");
+            }
+        });
+    }
+    function deleteSubscriberOnClick() {
+        var row = $(this).closest("tr");
+        var id = row.find("td:eq[0]").text();
+        alert("Delete Id value is: " + id);
+        var url = "https://localhost:44378/Home/DeleteSubscriber?id="+id;
+        $.ajax({
+            type: "GET",
+            data: { id: id },
+            url: url
+        });
+    }
 </script>
